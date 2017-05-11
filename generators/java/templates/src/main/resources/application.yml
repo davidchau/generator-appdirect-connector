@@ -1,0 +1,21 @@
+connector.allowed.credentials: very-secure:password
+
+endpoints:
+  enabled: false
+  info:
+    enabled: true
+    sensitive: false
+  health:
+      enabled: true
+      sensitive: false
+      time-to-live: 5000
+
+info:
+  build:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+
+management:
+  security:
+    enabled: false

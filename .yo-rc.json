@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "David Chau",
+      "authorEmail": "david.chau@appdirect.com",
+      "authorUrl": ""
+    }
+  }
+}
