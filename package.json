@@ -1,6 +1,6 @@
 {
   "name": "generator-appdirect-connector",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Generator to bootstrap an AppDirect connector",
   "homepage": "",
   "author": {
