@@ -14,7 +14,7 @@
 	<description>${project.name} Connector</description>
 
 	<properties>
-		<service-integration-sdk.version>1.18</service-integration-sdk.version>
+		<service-integration-sdk.version>1.19</service-integration-sdk.version>
 		<testng.version>6.10</testng.version>
 		<org.assertj.core.version>3.5.2</org.assertj.core.version>
 		<org.mockito.core.version>1.10.19</org.mockito.core.version>
@@ -22,22 +22,24 @@
 
 	<repositories>
 		<repository>
-			<id>appdirect-artifactory</id>
-			<name>appdirect-artifactory</name>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<url>https://artifactory.appdirectondemand.com/artifactory/repo</url>
-		</repository>
-		<repository>
-			<id>appdirect-lib-snapshots</id>
-			<name>appdirect-libs-snapshot</name>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>https://artifactory.appdirectondemand.com/artifactory/libs-snapshot</url>
+			<id>bintray-appdirect-opensource-maven</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/appdirect-opensource/maven</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-appdirect-opensource-maven</id>
+			<name>bintray-plugins</name>
+			<url>http://dl.bintray.com/appdirect-opensource/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
