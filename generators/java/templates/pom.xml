@@ -14,31 +14,31 @@
 	<description>${project.name} Connector</description>
 
 	<properties>
-		<service-integration-sdk.version>1.19</service-integration-sdk.version>
+		<service-integration-sdk.version><%= sdkVersion %></service-integration-sdk.version>
 		<testng.version>6.10</testng.version>
 		<org.assertj.core.version>3.5.2</org.assertj.core.version>
 		<org.mockito.core.version>1.10.19</org.mockito.core.version>
 	</properties>
 
 	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>bintray-appdirect-opensource-maven</id>
-			<name>bintray</name>
-			<url>http://dl.bintray.com/appdirect-opensource/maven</url>
-		</repository>
+	    <repository>
+	        <snapshots>
+	            <enabled>false</enabled>
+	        </snapshots>
+	        <id>central</id>
+	        <name>bintray</name>
+	        <url>http://jcenter.bintray.com</url>
+	    </repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>bintray-appdirect-opensource-maven</id>
-			<name>bintray-plugins</name>
-			<url>http://dl.bintray.com/appdirect-opensource/maven</url>
-		</pluginRepository>
+	    <pluginRepository>
+	        <snapshots>
+	            <enabled>false</enabled>
+	        </snapshots>
+	        <id>central</id>
+	        <name>bintray-plugins</name>
+	        <url>http://jcenter.bintray.com</url>
+	  </pluginRepository>
 	</pluginRepositories>
 
 	<dependencies>

@@ -2,8 +2,29 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const request = require('request');
 
 module.exports = class extends Generator {
+  initializing() {
+    this.props = {};
+    const options = {
+      url: 'https://api.github.com/repos/AppDirect/service-integration-sdk/tags',
+      headers: {
+        'User-Agent': 'generator-appdirect-connector'
+      }
+    };
+
+    request(options, function(error, response, body) {
+      this.props.sdkVersion = JSON.parse(body)
+        .map(function(tag) {
+          return tag.name;
+        })
+        .filter(function (tagName) {
+          return !tagName.startsWith('v');
+        })[0];
+    }.bind(this));
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -19,10 +40,9 @@ module.exports = class extends Generator {
       name: 'artifactId',
       message: 'Define your project artifactId'
     }];
-
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
-      this.props = props;
+      Object.assign(this.props, props);
     });
   }
 

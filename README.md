@@ -25,7 +25,7 @@ yo appdirect-connector:java
 
 ## License
 
-Apache-2.0 © [David Chau]()
+Apache-2.0 © [David Chau](lyteh.chau@gmail.com)
 
 
 [npm-image]: https://badge.fury.io/js/generator-appdirect-connector.svg
