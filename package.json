@@ -8,9 +8,9 @@
     "email": "david.chau@appdirect.com",
     "url": ""
   },
-  "readme": "README.md",
   "files": [
-    "generators"
+    "generators",
+    "README.md"
   ],
   "main": "generators/index.js",
   "keywords": [
