@@ -15,7 +15,8 @@ Then generate your new project:
 ```bash
 yo appdirect-connector:java
 ```
-
+Read project's README.md for info about how to compile and run.
+	
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.

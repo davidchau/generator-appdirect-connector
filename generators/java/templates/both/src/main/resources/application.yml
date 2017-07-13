@@ -1,0 +1,65 @@
+# web
+server:
+  port: 8090
+  use-forward-headers: true
+  tomcat:
+    remote_ip_header: x-forwarded-for
+    max-threads: 100
+
+# database
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/default_db_name?createDatabaseIfNotExist=true
+    username: root
+    password: password
+    max-active: 20
+    max-idle: 20
+    test-while-idle : true
+    test-on-borrow : true
+    validation-query : SELECT 1
+    time-between-eviction-runs-millis : 5000
+    min-evictable-idle-time-millis : 60000
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+
+signature:
+  validation:
+    use:
+      https: false
+
+flyway:
+  enabled: true
+  repair: false
+
+endpoints:
+  enabled: false
+  info:
+    enabled: true
+    sensitive: false
+  health:
+      sensitive: false
+      enabled: true
+      time-to-live: 5
+
+info:
+  build:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+
+logging:
+  level:
+    ROOT: INFO
+    com.appdirect: DEBUG
+
+connector:
+  credentials:
+    key: key
+    secret: secret
+
+management:
+  security:
+    enabled: false
