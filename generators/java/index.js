@@ -39,6 +39,16 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'artifactId',
       message: 'Define your project artifactId'
+    }, {
+      type: 'confirm',
+      name: 'docker',
+      message: 'Would you like to use Docker?',
+      default: false
+    }, {
+      type: 'confirm',
+      name: 'mysqlAndFlyway',
+      message: 'Would you like to use Mysql and Flyway?',
+      default: false
     }];
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
@@ -46,28 +56,55 @@ module.exports = class extends Generator {
     });
   }
 
-  writing() {
+  writing() {                     
+  //equal files for all versions
     this.fs.copyTpl(
-      this.templatePath('src/main/java/**'),
+      this.templatePath('base/src/main/java/**'),
       this.destinationPath(this.props.artifactId + '/src/main/java/' + this.props.groupId.replace('/./g', '/')),
       this.props
     );
     this.fs.copyTpl(
-      this.templatePath('src/main/resources/**'),
-      this.destinationPath(this.props.artifactId + '/src/main/resources'),
-      this.props
-    );
-    this.fs.copyTpl(
-      this.templatePath('src/test/java/**'),
+      this.templatePath('base/src/test/java/**'),
       this.destinationPath(this.props.artifactId + '/src/test/java/' + this.props.groupId.replace('/./g', '/')),
       this.props
     );
     this.fs.copyTpl(
-      this.templatePath('*'),
+      this.templatePath('.gitignoreTemplate'),
+      this.destinationPath(this.props.artifactId + '/.gitignore'),
+      this.props
+    );
+    var root = 'base/*';
+    var yml = 'base/src/main/resources/**';
+    if(this.props.docker){
+      this.fs.copyTpl(  //entrypoint
+        this.templatePath('both/src/main/bash/entrypoint.sh'),
+        this.destinationPath(this.props.artifactId + '/src/main/bash/entrypoint.sh'),
+        this.props
+      );
+      if(this.props.mysqlAndFlyway){
+        root = 'both/*';
+        yml = 'both/src/main/resources/**';
+      } else {
+        root = 'docker/*';
+      }
+    } else {
+      if(this.props.mysqlAndFlyway){
+        root = 'mysqlAndFlyway/*';
+        yml = 'mysqlAndFlyway/src/main/resources/**';
+      }
+    }
+    this.fs.copyTpl(            //root
+      this.templatePath(root),
       this.destinationPath(this.props.artifactId),
       this.props
     );
+    this.fs.copyTpl(            //yml
+      this.templatePath(yml),
+      this.destinationPath(this.props.artifactId + '/src/main/resources'),
+      this.props
+    );
   }
+
 
   install() {
   //  Do nothing

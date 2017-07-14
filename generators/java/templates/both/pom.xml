@@ -1,0 +1,217 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId><%= groupId %>
+	</groupId>
+	<artifactId><%= artifactId %>
+	</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<description>${project.name} Connector</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
+	</parent>
+	<!-- Properties -->
+	<properties>
+		<java.version>1.8</java.version>
+		<testng.version>6.10</testng.version>
+		<org.assertj.core.version>3.5.2</org.assertj.core.version>
+		<org.mockito.core.version>1.10.19</org.mockito.core.version>
+		<service-integration-sdk.version><%= sdkVersion %></service-integration-sdk.version>
+		<lombok.version>1.16.10</lombok.version>
+		<flyway-core.version>4.0.3</flyway-core.version>
+		<sonar.jacoco.reportPath>${jacoco.ut.execution.data.file}</sonar.jacoco.reportPath>
+		<sonar.jacoco.itReportPath>${jacoco.it.execution.data.file}</sonar.jacoco.itReportPath>
+		<!-- base jacoco path -->
+		<jacoco.it.execution.data.file>${project.basedir}/target/jacoco-it.exec</jacoco.it.execution.data.file>
+		<jacoco.ut.execution.data.file>${project.basedir}/target/jacoco-ut.exec</jacoco.ut.execution.data.file>
+		<mysql-connector-java.version>5.1.34</mysql-connector-java.version>
+		<h2.version>1.4.192</h2.version>
+		<com.google.guava.version>20.0</com.google.guava.version>
+		<com.googlecode.openpojo.version>0.3.2</com.googlecode.openpojo.version>
+		<org.apache.commons.version>3.5</org.apache.commons.version>
+		<org.hibernate-java8.version>5.1.0.Final</org.hibernate-java8.version>
+	</properties>
+	<!-- Repositories -->
+	<repositories>
+		<repository>
+			<id>appdirect-artifactory</id>
+			<name>appdirect-artifactory</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>https://artifactory.appdirectondemand.com/artifactory/repo</url>
+		</repository>
+		<repository>
+			<id>appdirect-lib-snapshots</id>
+			<name>appdirect-libs-snapshot</name>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>https://artifactory.appdirectondemand.com/artifactory/libs-snapshot</url>
+		</repository>
+	</repositories>
+	<!-- Dependencies -->
+	<dependencies>
+		<!-- Appdirect SDK -->
+		<dependency>
+			<groupId>com.appdirect</groupId>
+			<artifactId>service-integration-sdk</artifactId>
+			<version>${service-integration-sdk.version}</version>
+		</dependency>
+		<!-- ${project.name} SDK -->
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+		<!-- Flyway -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway-core.version}</version>
+		</dependency>
+		<!-- MySql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
+		</dependency>
+		<!-- TestNG -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${org.assertj.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${org.mockito.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${com.google.guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.openpojo</groupId>
+			<artifactId>openpojo</artifactId>
+			<version>${com.googlecode.openpojo.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${org.apache.commons.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<!-- Build -->
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- Spring Boot maven plugin -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- Docker maven plugin -->
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<configuration>
+					<dockerDirectory>${project.basedir}</dockerDirectory>
+					<imageName>docker.appdirect.tools/${artifactId}/${artifactId}</imageName>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+					<serverId>docker</serverId>
+					<registryUrl>https://docker.appdirect.tools/v2/</registryUrl>
+				</configuration>
+			</plugin>
+			<!-- Jacoco Code Coverage plugin -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.6.201602180812</version>
+				<executions>
+					<execution>
+						<id>pre-unit-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<destFile>${jacoco.ut.execution.data.file}</destFile>
+							<append>true</append>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${jacoco.ut.execution.data.file}</dataFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>pre-integration-test</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<destFile>${jacoco.it.execution.data.file}</destFile>
+							<propertyName>failsafeArgLine</propertyName>
+							<append>true</append>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${jacoco.it.execution.data.file}</dataFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>jenkins</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>sonar</id>
+			<properties>
+			</properties>
+		</profile>
+	</profiles>
+</project>

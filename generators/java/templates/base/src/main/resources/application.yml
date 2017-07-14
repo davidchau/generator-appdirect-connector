@@ -19,3 +19,9 @@ info:
 management:
   security:
     enabled: false
+
+connector:
+  credentials:
+    key: key
+    secret: secret
+    
