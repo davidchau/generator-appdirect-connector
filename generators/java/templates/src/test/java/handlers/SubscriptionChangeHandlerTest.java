@@ -21,7 +21,7 @@ public class SubscriptionChangeHandlerTest {
 
 	@Test
 	public void dummy() throws Exception {
-		SubscriptionChange event = new SubscriptionChange("consumerKey", null, null, null, null, EventFlag.DEVELOPMENT, "eventToken", "http://marketplace.url");
+		SubscriptionChange event = new SubscriptionChange("consumerKey", null, null, null, null, null, EventFlag.DEVELOPMENT, "eventToken", "http://marketplace.url");
 
 		APIResult result = subscriptionChangeHandler.handle(event);
 

@@ -1,10 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId><%= groupId %>
-	</groupId>
-	<artifactId><%= artifactId %>
-	</artifactId>
+	<groupId><%= groupId %></groupId>
+	<artifactId><%= artifactId %></artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<parent>
@@ -16,33 +14,11 @@
 	<description>${project.name} Connector</description>
 
 	<properties>
-		<service-integration-sdk.version><%= sdkVersion %>
-		</service-integration-sdk.version>
+		<service-integration-sdk.version><%= sdkVersion %></service-integration-sdk.version>
 		<testng.version>6.10</testng.version>
 		<org.assertj.core.version>3.5.2</org.assertj.core.version>
 		<org.mockito.core.version>1.10.19</org.mockito.core.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>bintray</name>
-			<url>http://jcenter.bintray.com</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>bintray-plugins</name>
-			<url>http://jcenter.bintray.com</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
