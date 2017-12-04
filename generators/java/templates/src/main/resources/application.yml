@@ -1,5 +1,10 @@
 connector.allowed.credentials: very-secure:password
 
+server:
+  use-forward-headers: true
+  tomcat:
+    remote_ip_header: x-forwarded-for
+
 endpoints:
   enabled: false
   info:
@@ -15,7 +20,3 @@ info:
     name: @project.name@
     description: @project.description@
     version: @project.version@
-
-management:
-  security:
-    enabled: false
