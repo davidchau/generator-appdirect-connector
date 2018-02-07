@@ -1,6 +1,6 @@
 {
   "name": "generator-appdirect-connector",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Generator to bootstrap an AppDirect connector",
   "homepage": "",
   "author": {
@@ -19,18 +19,18 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "yeoman-test": "^1.6.0",
+    "eslint": "^4.17.0",
+    "eslint-config-xo-space": "^0.17.0",
+    "jest": "^22.2.1",
+    "jest-cli": "^22.2.1",
+    "nsp": "^3.1.0",
     "yeoman-assert": "^3.0.0",
-    "nsp": "^2.6.3",
-    "eslint": "^3.18.0",
-    "eslint-config-xo-space": "^0.16.0",
-    "jest": "^19.0.2",
-    "jest-cli": "^19.0.1"
+    "yeoman-test": "^1.6.0"
   },
   "dependencies": {
-    "yeoman-generator": "^1.0.0",
-    "chalk": "^1.1.3",
+    "chalk": "^2.3.0",
     "request": "^2.81.0",
+    "yeoman-generator": "^2.0.2",
     "yosay": "^2.0.0"
   },
   "jest": {
